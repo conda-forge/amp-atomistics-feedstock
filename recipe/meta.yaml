@@ -23,13 +23,13 @@ requirements:
     - python
     - numpy
     - pip
+    - setuptools
   run:
     - python
     - matplotlib-base
     - ase
     - pyzmq
     - pexpect
-    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
