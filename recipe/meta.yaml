@@ -11,12 +11,13 @@ source:
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 2
+  number: 3
   skip: true  # [not linux]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('fortran') }}
   host:
     - python
@@ -28,7 +29,6 @@ requirements:
     - ase
     - pyzmq
     - pexpect
-    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
