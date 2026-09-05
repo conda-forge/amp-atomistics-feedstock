@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: amp-atomistics
+  version: "1.0.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/amp-atomistics-${{ version }}.tar.gz
+  sha256: 91c097930f71534bbd8cedc922ef35a2883ab2e10587e1e95c04ce23ad34233f
+
+build:
+  number: 3
+  skip: not linux
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('fortran') }}
+  host:
+    - python
+    - numpy
+    - pip
+  run:
+    - python
+    - matplotlib-base
+    - ase
+    - pyzmq
+    - pexpect
+    - ${{ pin_compatible('numpy') }}
+
+tests:
+  - python:
+      imports:
+        - amp
+      pip_check: true
+
+about:
+  summary: Atomistic Machine-learning Package
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  homepage: https://bitbucket.org/andrewpeterson/amp
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
